@@ -1,16 +1,496 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>A-Frame Boilerplate</title>
+  <link rel="shortcut icon" type="image/jpg" href="./assets/red-favi.jpg"/>
+  <title>Whiteheads Ark - A VR Experience </title>
+  <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+
+  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+   <!-- <script src="./version1.1.0.min.js"></script>  -->
+   <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script> 
+
+  <!-- <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script> -->
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.1/dist/aframe-extras.min.js" ></script>
+  <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
+  <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+  <!-- <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script> -->
+  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+
+
+  <!-- Custom Scripts -->
+    <script src="js/start-button.js"></script>
+   <script src="instanced-mesh.js"></script>
+   <script src="js/swap-camera.js"></script>
+   <script src="js/diorama-toggle.js"></script>
+   <script src="js/audio-switch-at-distance.js"></script>
+   <script src="js/cardboard-controls.js"></script>
+    <!-- <script src="js/components.js"></script> -->
+  
 </head>
+
 <body>
-  <script src="./index.js"></script>
-  <a-scene>
-    <a-text value="&Samhoudmedia" position="-1 2 -3"></a-text>
-    <a-sky color="#1D94D2"></a-sky>
+
+  <div id="container" class="container">
+    <div class="info">
+      <div class="title"> <img class="wh-img" src="./assets/images/wh-img.png"></div>
+      <div class="title2">A virtual reality experience showcasing endemic birds of the Philippines. <br> View on your desktop, or insert your phone into a VR Box.</div>
+      <br> <br> <br>
+      <div class="title3">Loading</div>
+      <div class="container1">
+        <div class="item yellow"></div>
+        <div class="item red"></div>
+        <div class="item blue"></div>
+        <div class="item violet"></div>
+    </div>
+      <a class="button" id="start_experience" href="#">ENTER EXPERIENCE</a>
+      <div class="footer">
+        <div class="date"> Updated - 16th Jan 2022
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<a-scene 
+
+loading-screen="dotsColor: red; backgroundColor: black"
+renderer="antialias: true;
+sortObjects: true;
+   maxCanvasWidth: 1920;
+   maxCanvasHeight: 1920;
+   physicallyCorrectLights: true;
+   colorManagement: true;"
+light="defaultLightsEnabled: false"
+> 
+<!-- fog="type: exponential; color: #fae19b; density: 0.0012"; -->
+  <!-- cursor="rayOrigin: mouse" -->
+  <!-- inspector="url: xxx" -->
+
+
+
+    <!-- Load Assets  -->
+    <a-assets timeout="10000">
+      <a-asset-item id="palm-tree-wind" src="" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+
+      <!-- <a-asset-item id="bird-flock" src="https://cdn.glitch.com/89d2b3d9-725a-4783-b1c2-994adb93ea2c%2Fscene.glb?v=1622985798347" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item> -->
+      <a-asset-item id="bird-flock" crossOrigin="anonymous" src=""></a-asset-item>
+
+      <a-asset-item id="butterfly-model" crossOrigin="anonymous" src=""></a-asset-item>
+
+
+
+      <a-asset-item id="map-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="low-trees-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="small-rocks-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="gold-rocks-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="cliff-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="fence-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="sign-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="samar-sign-model" response-type="arraybuffer" src=""></a-asset-item>
+
+
+      <a-asset-item id="flower-model" crossOrigin="anonymous" src=""></a-asset-item>
+      <a-asset-item id="tree-group-model" crossOrigin="anonymous" src=""></a-asset-item>
+      <a-asset-item id="tree-single-model" crossOrigin="anonymous" src=""></a-asset-item>
+      <a-asset-item id="rainbow-model" crossOrigin="anonymous" src=""></a-asset-item>
+      <a-asset-item id="shipwreck-model" crossOrigin="anonymous" src=""></a-asset-item>
+      <a-asset-item id="vine-model" crossOrigin="anonymous" src=""></a-asset-item>
+      <a-asset-item id="tree-model" crossOrigin="anonymous" src=""></a-asset-item>
+
+
+
+      <a-asset-item id="bird-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="owl-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="pigeon-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="shrike-model" response-type="arraybuffer" src=""></a-asset-item>
+
+
+      <a-asset-item id="diorama-model" response-type="arraybuffer" src=""></a-asset-item>
+
+      <a-asset-item id="nav-mesh-model" response-type="arraybuffer" src=""></a-asset-item>
+      <a-asset-item id="diorama-nav-mesh" response-type="arraybuffer" src=""></a-asset-item>
+
+
+
+      <img id="water" crossOrigin="anonymous" src="">
+      <img id="black-image" crossOrigin="anonymous" src="">
+
+      <img crossorigin="anonymous" id="sky-image" src="">  
+      <img crossorigin="anonymous" id="second-sky" src="">  
+      <img crossorigin="anonymous" id="portal-texture" src=""> 
+      <img crossorigin="anonymous" id="background-image" src="">  
+ 
+
+      <audio id="bird-sound-1" src="./assets/audio/1.mp3" preload="auto"></audio>
+      <audio id="bird-sound-2" src="./assets/audio/2.mp3" preload="auto"></audio>
+      <audio id="bird-sound-3" src="./assets/audio/3.mp3" preload="auto"></audio>
+      <audio id="bird-sound-4" src="./assets/audio/4.mp3" preload="auto"></audio>
+
+      </a-assets>
+
+       <!-- Start Info -->
+       <a-entity id="start-info-wrapper">
+       <a-entity id="start-fly-button1" text="value:  Welcome to The Whiteheads Ark, once you land on the island, walk around and discover our birds. Click on their portal to enter their world; align: center" position="435.25436 184.18495 -750.75081" scale="50 50 50" rotation="0 -167 0.27"></a-entity>
+       <a-box class="clickable" id="start-fly" scale="12 6 6" material="color: grey" position="438 166 -745" rotation="0 30 0"></a-box>
+       <a-entity id="start-fly-button" text="value: START; align: center" position="435.25436 166.40837 -750.75081" scale="50 50 50" rotation="0 -153.87 0.27" text="value:  START;  align:  center"></a-entity>
+      </a-entity>
+
+      <a-entity cardboard-controls></a-entity>
+
+
+    <!-- ****************************** Camera Setup ****************************** -->
+    <!-- CAMERA - 1 -->
+    <a-entity swap-camera id="rig-wrapper" position="410 166 -797" start-button>
+    <a-entity id="rig"  rotation="0 -180 0">
+    <a-entity id="camera-1" camera  rotation="0 100 0" position="0 7 0" look-controls="pointerLockEnabled:true">
+      <a-image id="blink1" src="#black-image" position="0 0 -0.3" opacity="0" toggleSky 
+      animation="property: opacity; to: 1; dur: 600; easing: linear; autoplay: false; startEvents: blink-eye; property: opacity; to: 1; dur: 900; easing: linear; autoplay: false; startEvents: blink-eye; " 
+      animation__2="property: opacity; delay: 650; to: 0; dur: 600; easing: linear; autoplay: false; startEvents: blink-eye2;"></a-image>
+      <a-cursor 
+      geometry="primitive: ring; radiusInner: 0.03; radiusOuter: 0.05;"
+      material="color: white; shader: flat"
+      raycaster="objects: .clickable; far: 60" fuse="true" fusetimeout="2000"
+      animation="property: scale; easing: easeInSine; from: 2.5 2.5 2.5; to: 1 1 1; dur: 2000; startEvents: mouseenter;"
+      animation__2="property: scale; easing: easeInSine; from: 1 1 1; to: 1 1 1; dur: 20; startEvents: mouseleave"></a-cursor>
+      </a-entity>  
+    </a-entity>
+
+  </a-entity>
+  <!-- CAMERA - 2 -->
+    <a-entity id="rig-2" movement-controls="controls: cardboard, gamepad, keyboard, touch; constrainToNavMesh: true; speed: 4;" position="422 20 -434" rotation="0 140 0">
+    <a-entity id="camera-2" camera  rotation="0 100 0" position="0 15 0" look-controls="pointerLockEnabled:true">
+      <!-- Blink does not work in VR mode -->
+      <a-image id="blink2" src="#black-image" position="0 0 -0.3" opacity="1" toggleSky 
+      animation="property: opacity; to: 1; dur: 600; easing: linear; autoplay: false; startEvents: blink-eyes; property: opacity; to: 1; dur: 900; easing: linear; autoplay: false; startEvents: blink-eye; " 
+      animation__2="property: opacity; delay: 650; to: 0; dur: 600; easing: linear; autoplay: false; startEvents: blink-eyes2;"></a-image>
+      <a-cursor 
+      geometry="primitive: ring; radiusInner: 0.03; radiusOuter: 0.05;"
+      material="color: white; shader: flat"
+      raycaster="objects: .clickable; far: 60" fuse="true" fusetimeout="2000"
+      animation="property: scale; easing: easeInSine; from: 2.5 2.5 2.5; to: 1 1 1; dur: 2000; startEvents: fusing"
+      animation__2="property: scale; easing: easeInSine; from: 1 1 1; to: 1 1 1; dur: 20; startEvents: mouseleave"></a-cursor>
+      </a-entity>  
+        </a-entity>
+
+    <a-sky id="orbSky" material="src: #sky-image; fog: false" rotation="0 0 0" scale="3.5 3.5 3.5" ></a-sky>
+
+       <!-- Lights -->
+       <a-entity position="305.04001 293.06354 0" light=" type: ambient; color:  #ffffff;  intensity:  1;  distance:  2.15" id="light-1"></a-entity>
+       <!-- <a-entity position="158.95941 86.83075 -232.66563" light="color: #ffd500; intensity: 5.59; angle: 50; groundColor: #87983b; decay: 0.14; distance: 90; type: point; shadowBias: 0.01; shadowCameraFar: 100; shadowMapHeight: 100; shadowMapWidth: 100; shadowRadius: 0.1" id="light-2" visible="true"></a-entity>   -->
+       <!-- <a-entity position="-60.82008 235.93288 -32.13964" light="color: #ffd500; intensity: 9.44; angle: 100; groundColor: #87983b; decay: -0.33; distance: 150; type: point; shadowBias: 0.01; shadowCameraFar: 100; shadowMapHeight: 100; shadowMapWidth: 100; shadowRadius: 0.1" id="light-3" visible="true"></a-entity> -->
+       <!-- ******************************  ****************************** -->
+       <a-plane position="0 0 -4" rotation="-90 0 0" width="3500" height="3500" color="#328da4" src="#water"  repeat="20 20"  emissive="#224927" opacity="0.61" ></a-plane>
+
+
+   
+
+
+   <!-- MAIN SCENE SETUP -->
+    <a-entity id="main-scene-wrapper">
+
+    <a-entity id="map" gltf-model="#map-model" scale="2 2 2" position="0 -1 0"></a-entity>
+
+    <a-entity id="fence"  gltf-model="#fence-model"  rotation="0 0 0"position="0 -1 0" scale="2 2 2" ></a-entity>
+    <a-entity id="sign" gltf-model="#sign-model" rotation="0 88.68 0" position="151.5 18.3 -170.44807" scale="13 13 13" ></a-entity>    
+    <a-entity id="shipwreck" gltf-model="#shipwreck-model" position="198.41755 -12.79279 -451.23977" rotation="35.70100021460159 -82.04354555816796 5.979960507780402" scale="2 2 2"></a-entity> 
+    <a-entity id="smallRocks" gltf-model="#small-rocks-model"  scale="0.7 0.7 0.7" position="-138 38.4 -206" rotation="2.9 2.32 -7.2"></a-entity>
+
+    <a-entity id="walkmesh"  gltf-model="#nav-mesh-model" position="0 0 0 " scale="2 2 2" nav-mesh visible="false"  ></a-entity>
+
+  
+
+
+    <!-- <a-entity id="flower-2"  gltf-model="#flower-model"  rotation="0 0 0"position="188 23 -51" scale="15 15 15" ></a-entity>  
+    <a-entity id="flower-3"  gltf-model="#flower-model"  rotation="0 0 0"position="-161 32 60" scale="10 10 10" ></a-entity>
+    <a-entity id="flower-4"  gltf-model="#flower-model"  rotation="0 0 0"position="91 21 -99" scale="8 8 8" ></a-entity>
+    <a-entity id="flower-5"  gltf-model="#flower-model"  rotation="0 0 0"position="211 18 -150" scale="6 6 6" ></a-entity>
+    <a-entity id="flower-6" gltf-model="#flower-model" rotation="" position="106.09762 23.62636 -39.36567" scale="8 8 8"></a-entity>
+    <a-entity id="flower-7" gltf-model="#flower-model" rotation="" position="47.63526 23.65824 -7.34142" scale="16 16 16"></a-entity>
+    <a-entity id="flower-8" gltf-model="#flower-model" rotation="" position="-8.30823 24.0695 29.83827" scale="14 14 14"></a-entity> -->
+
+    <a-entity id="vine-1" gltf-model="#vine-model" rotation="-9.49276474972748 29.673484209825336 2.6562323382264963" position="126.64286 52.18322 -23.94322" scale="0.2 0.2 0.3"></a-entity>
+    <a-entity id="vine-2" gltf-model="#vine-model" rotation="0 39.193177975923966 0" position="66.1841 63.26439 27.22158" scale="0.2 0.2 0.3"></a-entity>
+    <a-entity id="vine-3" gltf-model="#vine-model" rotation="-10.128747902322692 0 0" position="11.27976 60.92426 93.76744" scale="0.7 0.4 0.41"></a-entity>
+
+    
+    <!-- CORDIELLERA  -->
+    <!-- White Browed Fly Catcher  -->
+   <a-entity id="bird-1" gltf-model="#bird-model" position="317 24 -122" rotation="0 -100 0" scale ="2 2 2" animation-mixer="clip: IDLE; timeScale:0.7" ></a-entity>
+   <a-entity id="bird-2" gltf-model="#bird-model" position="300 24 -127" rotation="0 -60 0" scale ="2 2 2" animation-mixer="clip: IDLE; timeScale:1.5" ></a-entity>
+   <!-- <a-entity sound="src: #bird-sound-1; volume:2; refDistance: 20; rolloffFactor:0.5"></a-entity> -->
+
+    <!-- Portal 1 (Cordillera) -->
+    <a-entity id="portal-1" position="333 31 -108"
+    audio-switch-at-distance="target: #rig-2; distance: 80"
+    sound="src: #bird-sound-1; loop: true; autoplay: false; volume: 5; refDistance: 2; rolloffFactor: 4;">
+      <a-sphere id="portal-1-sphere" position="0 -2 0" class="clickable" rotation="0 180 0" radius="2" material="src: #portal-texture; repeat: 1 1; roughness: 2;" color="#ffffff" opacity="1" roughness="0.8"
+      event-set__click="_target: #highlight1;"
+
+      event-set__start="_target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 1;" event-set__mouseenter="_target: #highlight1; animation.property: visible; animation.dur: 20; animation.to: true;"
+      event-set__mouseleave="_target: #highlight1; animation.property: visible; animation.dur: 20; animation.to: false;" event-set__end="_delay: 650; _target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 0;" cordillera-toggle 
+      > </a-sphere>
+      <a-sphere position="0 -2 0" id="highlight1" class="highlight" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5"></a-sphere>
+      <!-- <a-box id="shadow" position="0 -9.7 0" color="#bd8400" opacity="1" rotation="0 0 0" scale="1.4 8 1.4"></a-box> -->
+      <a-plane id="cordillera-card" scale="20 20 1" position="-59 7.4 -32">
+        <a-entity id="cordiellera-title" text="value: Cordiellera; wrapCount:13" position="0.019 0.360 0.1" scale="1 1 1" rotation="0 0 0"  ></a-entity>
+        <a-entity id="cordiellera-bird" text="value: Montane Racket Tail; wrapCount:16.5" position="-0.15 0.167 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"  ></a-entity>
+        <a-entity id="cordiellera-bird-2" text="value: White-browed jungle fly catcher; wrapCount:16.5" position="-0.15 -0.026 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"></a-entity>
+
+      </a-plane>
+  
+    </a-entity>
+     
+
+
+      <!-- BENGET -->
+      <!-- Portal 2 -->
+        <a-entity id="portal-2" position="146 34 -206"
+        audio-switch-at-distance="target: #rig-2; distance: 80"
+        sound="src: #bird-sound-2; loop: true; autoplay: false; volume: 5; refDistance: 2; rolloffFactor: 4;">
+        <a-entity id="portal-helper" text="value: Point your raycaster at the portal to enter their world; wrapCount:26.1; align: center"   scale="20 20 20" position="-0.297 5.120 0.050" rotation="0 142 0" ></a-entity>
+        <a-sphere position="0 -2 0" class="clickable" rotation="0 180 0" radius="2" material="src: #portal-texture; roughness: 2;" color="#ffffff" opacity="1" roughness="0.8"
+        event-set__start="_target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 1;"
+        event-set__mouseenter="_target: #highlight2; animation.property: visible; animation.dur: 20; animation.to: true;"
+        event-set__mouseleave="_target: #highlight2; animation.property: visible; animation.dur: 20; animation.to: false;"
+        event-set__end="_delay: 650; _target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 0;" benget-toggle>
+        </a-sphere>
+        <a-sphere position="0 -2 0" id="highlight2" class="highlight" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5"></a-sphere>
+        <!-- <a-box id="shadow" position="0 -9.7 0" color="#bd8400" opacity="1" rotation="0 0 0" scale="1.4 8 1.4"></a-box> -->
+        <a-plane id="benget-card" scale="14 14 1" position="-43 1 -10.8" rotation="0 122 0">
+          <a-entity id="benget-title" text="value: Benget; wrapCount:13" position="0.019 0.360 0.1" scale="1 1 1" rotation="0 0 0"  ></a-entity>
+          <a-entity id="benget-bird" text="value: Luzon Highlands Scops Owl; wrapCount:16.5" position="-0.15 0.167 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"  ></a-entity>
+          <a-entity id="benget-bird-2" text="value: Luzon Water Redstart; wrapCount:16.5" position="-0.15 -0.026 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"></a-entity>
+        </a-plane>
+      </a-entity>
+
+        <a-entity id="owlModel" gltf-model="#owl-model" position="120 53.6 -205" rotation="0 135 0" scale ="3.3 3.1 3.3" animation-mixer="clip: ; timeScale:1" ></a-entity>
+  
+      
+
+      <!-- Mindoro -->
+      <!-- Portal 3 -->
+      <a-entity id="portal-3" position="-67 44 75"
+      audio-switch-at-distance="target: #rig-2; distance: 80"
+      sound="src: #bird-sound-3; loop: true; autoplay: false; volume: 5; refDistance: 2; rolloffFactor: 4;">
+        <a-sphere position="9.7 -2 0" class="clickable" rotation="0 180 0" radius="2" material="src: #portal-texture; roughness: 2;" color="#ffffff" opacity="1" roughness="0.8"
+        event-set__start="_target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 1;"
+        event-set__mouseenter="_target: #highlight3; animation.property: visible; animation.dur: 20; animation.to: true;"
+        event-set__mouseleave="_target: #highlight3; animation.property: visible; animation.dur: 20; animation.to: false;"
+        event-set__end="_delay: 650; _target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 0;" mindoro-toggle>
+        </a-sphere>
+        <a-sphere position="9.7 -2 0" id="highlight3" class="highlight" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5"></a-sphere>
+        <!-- <a-box id="shadow" position="0 -9.7 0" color="#bd8400" opacity="1" rotation="0 0 0" scale="1.4 8 1.4"></a-box> -->
+        <a-plane id="mindoro-card" scale="14 14 1" position="13.7 5.5 -17" rotation="0 -35 0">
+          <a-entity id="benget-title" text="value: Mindoro; wrapCount:13" position="0.019 0.360 0.1" scale="1 1 1" rotation="0 0 0"  ></a-entity>
+          <a-entity id="benget-bird" text="value: Mindoro Imperial Pigeon; wrapCount:16.5" position="-0.15 0.167 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"  ></a-entity>
+          <a-entity id="benget-bird-2" text="value: Mountain Shrike; wrapCount:16.5" position="-0.15 -0.026 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"></a-entity>
+        </a-plane>  
+
+        <a-entity id="pigeonModel" gltf-model="#pigeon-model" position="3.458 -2.799 -33.558" rotation="0 135 0" scale ="7 7 7" animation-mixer="clip: idle; timeScale:1" ></a-entity>
+        <a-entity id="shrikeModel" gltf-model="#shrike-model" position="-1.906 -10.630 -58.271" rotation="0 135 0" scale ="7 7 7" animation-mixer="clip: idle; timeScale:1" ></a-entity>
+
+        </a-entity>
+
+      <!-- Cagayan -->
+      <!-- Portal 4 -->
+      <a-entity id="portal-4" position="-378.635 79.8 -30"
+      audio-switch-at-distance="target: #rig-2; distance: 80"
+      sound="src: #bird-sound-4; loop: true; autoplay: false; volume: 5; refDistance: 2; rolloffFactor: 4;">
+        <a-sphere position="0 -2 0" class="clickable" rotation="0 180 0" radius="2" material="src: #portal-texture; roughness: 2;" color="#ffffff" opacity="1" roughness="0.8"
+        event-set__start="_target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 1;"
+        event-set__mouseenter="_target: #highlight4; animation.property: visible; animation.dur: 20; animation.to: true;"
+        event-set__mouseleave="_target: #highlight4; animation.property: visible; animation.dur: 20; animation.to: false;"
+        event-set__end="_delay: 650; _target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 0;" cagayan-toggle>
+        </a-sphere>
+        <a-sphere position="0 -2 0" id="highlight4" class="highlight" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5"></a-sphere>
+        <!-- <a-box id="shadow" position="0 -9.7 0" color="#bd8400" opacity="1" rotation="0 0 0" scale="1.4 8 1.4"></a-box> -->
+        <a-plane id="cagayan-card" scale="14 14 1" position="-12.923 5.500 16.505" rotation="0 87.4 0">
+          <a-entity id="benget-title" text="value: Cagayan; wrapCount:13" position="0.019 0.360 0.1" scale="1 1 1" rotation="0 0 0"  ></a-entity>
+          <a-entity id="benget-bird" text="value: Babler Luzon Stripe; wrapCount:16.5" position="-0.15 0.167 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"  ></a-entity>
+          <a-entity id="benget-bird-2" text="value: Golden Crowned Babbler; wrapCount:16.5" position="-0.15 -0.026 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"></a-entity>
+        </a-plane>  
+        </a-entity>
+
+      <!-- EAGLE WORLD -->
+      <!-- Portal 5 -->
+
+ 
+    <!-- Along Path Curve Setup -->
+    <!-- Main World -->
+       <!-- Intro Camera Path  -->
+       <a-curve id="track1">
+        <a-curve-point position="607 162 -643"></a-curve-point>
+        <a-curve-point position="422 20 -434"></a-curve-point>
+      </a-curve>
+    
+        <!-- Flock of Birds Path -->
+        <a-curve id="track2">
+          <a-curve-point position="410 166 -797"></a-curve-point>
+          <a-curve-point position="66 170 -380 "></a-curve-point>
+          <a-curve-point position="-320 181 -173"></a-curve-point>
+          <a-curve-point position="80 100 40"></a-curve-point>
+          <a-curve-point position="-80 120 -390"></a-curve-point>
+        </a-curve>
+
+        <!-- Butterfly Path -->
+        <a-curve id="track3">
+        <a-curve-point position="410 40 -389.088"></a-curve-point>
+        <a-curve-point position="360 30 -359.088"></a-curve-point>
+        <a-curve-point position="598 44 -499.088"></a-curve-point>
+        <a-curve-point position="620 44 -500.088"></a-curve-point>
+      </a-curve>
+
+        <!-- Along Path Objects -->
+        <a-entity id="butterfly-1"  gltf-model="#butterfly-model"  rotation="0 90.000 0" position="410 40 -389.088" scale="0.3 0.3 0.3" animation-mixer="clip: ArmatureAction.001; loop:2; timeScale:1.3;" alongpath="curve: #track3; loop: true; dur:8000; rotate:true"></a-entity>
+       
+        <a-entity alongpath="curve: #track2; loop: true; dur:14500; rotate:true; triggerRadius:0.01" > 
+        <a-entity gltf-model="#bird-flock" scale="9 9 9" animation-mixer="clip: Scene; loop:2; timeScale:1.3;" rotation="0 180 0"  ></a-entity>
+        </a-entity>
+
+     
+  <!-- ******************************  ****************************** -->
+  <!-- START INSTANCING OBJECTS  -->
+  <!-- Main World Instancing -->
+  <!-- CLIFF  -->
+  <a-entity id="cliff" gltf-model="#cliff-model" instanced-mesh="capacity:10" position="0 0 0" scale="3 3 3 "></a-entity>
+  <!-- Left side -->
+  <a-entity id="cliff1" position="59 -6 20" rotation="-3 6 -1" scale="1.7 1.8 1.7" instanced-mesh-member="mesh:#cliff" ></a-entity>
+  <a-entity id="cliff2" position="15 -5 50" rotation="0 6 0" scale="1.7 1.8 1.7" instanced-mesh-member="mesh:#cliff" ></a-entity>
+  <!-- Middle Cliff -->
+  <a-entity id="cliff3" position="5 -6 -5" rotation="10 190 -7" scale="1.6 1.6 1.6" instanced-mesh-member="mesh:#cliff" ></a-entity>
+  <!-- First Cliff -->
+  <a-entity id="cliff4" position="107 -3 -72" rotation="7.5 -21 -6" scale="1.1 0.9 0.9" instanced-mesh-member="mesh:#cliff"></a-entity>
+  <!-- Big Cliff -->
+    <a-entity id="cliff5" position="-140 -4 70" rotation="7.5 -120 -6" scale="3 3 3" instanced-mesh-member="mesh:#cliff"></a-entity>
+
+
+  <!-- GOLD ROCKS -->
+  <!-- <a-entity id="goldRocks" gltf-model="#gold-rocks-model" scale="1.5 1.5 1.5" position="58.9 30.4 -224" instanced-mesh="capacity:10"></a-entity> -->
+  <a-entity id="goldRocks" gltf-model="#gold-rocks-model"  position="58.9 29 -217" rotation="0 65 0"></a-entity>
+  <a-entity id="goldRocks2" gltf-model="#gold-rocks-model"  position="337 9 -265" rotation="0 65 0" scale="3 3 3"></a-entity>
+
+<!-- LOW TREES -->
+<a-entity id="low-trees-1" gltf-model="#low-trees-model" position="226.90463 10.10607 -254.40533" scale="0.06 0.06 0.06" rotation="0.5763955419016081 40.937261504302185 3.948825124041633"></a-entity>
+<a-entity id="low-trees-2" gltf-model="#low-trees-model" position="164.95659 12.17198 -112.04024" scale="0.07 0.07 0.07" rotation="0.1334991662654818 88.93680079138691 7.156242861183982"></a-entity>  
+<a-entity id="low-trees-3" gltf-model="#low-trees-model" position="-92.45209 7.21891 126.13199" scale="0.2 0.2 0.2" rotation="0.1334991662654818 28.128217036357505 7.156242861183982"></a-entity>
+<!-- <a-entity id="rainbow-tree" gltf-model="#rainbow-model" position="133 16 -162" scale="6 9 6" rotation="0 90 0" instanced-mesh="capacity:10"></a-entity>     <a-entity id="rainbow-tree-1" position="0 0 0" rotation="0 0 0" instanced-mesh-member="mesh:#rainbow-tree"></a-entity> -->
+
+  <!-- B-TREE -->
+  <a-entity id="tree-test" gltf-model="#tree-model" rotation="" position="-36.44516 23.61211 73.43869" scale="3 3.3 3" >
+    <a-plane id="balete-card" width="4" height="1.5" position="8 6 -1.3" rotation="0 20 0">
+      <a-entity id="balete-title" text="value: Balete (Ficus balete); wrapCount:16.750" position="0.019 0.079 0" scale="3.2 3.2 1" rotation="0 0 0"  ></a-entity> </a-plane>
+
+  </a-entity> 
+  <a-entity id="tree-test-2" gltf-model="#tree-model" rotation="" position="-78.61821 23.61211 -192.52767" scale="3 3.3 3"></a-entity>
+  <!-- <a-entity id="tree-test" gltf-model="#tree-model" rotation="" position="0 30 0" scale="0.005 0.005 0.005"  instanced-mesh="capacity:10"></a-entity> 
+  <a-entity id="tree-test-1" position="50 20 -90" instanced-mesh-member="mesh:#tree-test" rotation=""></a-entity>   -->
+
+  <a-entity id="samar-sign" gltf-model="#samar-sign-model"  position="-146 23.6 109" scale="13 13 13"></a-entity>
+
+ 
+
+
+  <!-- TREE SINGLE -->
+  <a-entity id="tree-single-mesh" gltf-model="#tree-single-model" instanced-mesh="capacity:10" scale="1 1.3 1" rotation="0 0 0"></a-entity>
+  <a-entity id="tree-single-1" position="115 16 -205" rotation="0 0 0" scale="1 1.3 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+  <a-entity id="tree-single-2" position="214 13 -175" rotation="0 0 0" scale="1 1.5 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+  <a-entity id="tree-single-3" position="114 13 -175" rotation="0 0 0" scale="1 1.8 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+  <a-entity id="tree-single-4" position="84 13 -29" rotation="0 0 0" scale="1 1.4 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+  <a-entity id="tree-single-5" position="84 13 -90" rotation="0 0 0" scale="1 1.2 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+  <a-entity id="tree-single-6" position="24 13 -180" rotation="0 0 0" scale="1 1.2 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+  <a-entity id="tree-single-7" position="-13 13 -160" rotation="0 0 0" scale="1 1.5 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+  <a-entity id="tree-single-8" position="-38 13 -155" rotation="0 0 0" scale="1 1.3 1" instanced-mesh-member="mesh:#tree-single-mesh"></a-entity>
+
+
+  <a-curvedimage src="url:https://ibb.co/cxP4mXV" height="3.0" radius="5.7" theta-length="72" rotation="0 -33.6154338403254 0" scale="8 8 8" material="color: #ac5353; src: [object HTMLImageElement]" geometry="height: 3.33; thetaLength: 72" position="-209.63646 75.86167 -170.40755"></a-curvedimage>
+
+  <!-- TREE GROUP -->
+  <a-entity id="tree-group-mesh" gltf-model="#tree-group-model" instanced-mesh="capacity:30" scale="1.3 1.3 1.3" rotation="0 0 0"></a-entity>
+  <!-- Trees around middle cliff -->
+  <a-entity id="tree-group-1" position="-120 35 -28" rotation="0 0 0" scale="1 1 1" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+  <a-entity id="tree-group-2" position="-148 35 18" rotation="0 0 0" scale="1.3 1.4 1.3" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+  <a-entity id="tree-group-3" position="-177 35 61" rotation="0 -110 0" scale="2 2.3 2" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+  <a-entity id="tree-group-4" position="-220 35 30" rotation="0 -110 0" scale="2 2 2" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+  <!-- Trees next to big cliff -->
+  <a-entity id="tree-group-4" position="-300 60 -86" rotation="0 -110 0" scale="1 1.3 1" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+  <!-- Trees ontop of cliff -->
+  <a-entity id="tree-group-5" position="80 85 110" rotation="0 -10 0" scale="1 1.3 1" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+  <a-entity id="tree-group-6" position="30 85 148" rotation="0 -10 0" scale="1 1.3 1" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+  <a-entity id="tree-group-7" position="-15 85 191" rotation="0 -50 0" scale="1 1.3 1" instanced-mesh-member="mesh:#tree-group-mesh"></a-entity>
+
+  <!-- PALM TREE -->
+  <a-entity id="palm-tree-mesh" gltf-model="#palm-tree-wind" instanced-mesh="capacity:15" scale="1 1 1" rotation="0 0 0"></a-entity>
+  <a-entity id="palm-wind-1" position="45 10 20" rotation="0 10 0" scale="4 4 4 " instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-2" position="13 20 40" rotation="0 20 0" scale="6 6 6" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-3" position="-50 26 -115" rotation="0 30 0" scale="3 3 3" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-4" position="-124 25 82" rotation="0 10 0" scale="7 7 7" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-5" position="-150 25 40" rotation="0 10 0" scale="7.5 7 7.5" instanced-mesh-member="mesh:#palm-tree-mesh" ></a-entity>
+  <a-entity id="palm-wind-6" position="-160 30 50" rotation="0 10 0" scale="6 6 6" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-7" position="-250 25 40" rotation="0 10 0" scale="10 10 10" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-8" position="-140 5 90" rotation="0 10 0" scale="5.5 5 5.5" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-9" position="-20 3 50" rotation="0 10 0" scale="6 6 6" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-10" position="-49 0 5" rotation="0 10 0" scale="7 6.5 7" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-11" position="-200 10 50" rotation="0 10 0" scale="6 6 6" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-12" position="-200 10 50" rotation="0 10 0" scale="5 5 5" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-13" position="262 0 121" rotation="0 10 0" scale="7.5 6.4 7.5" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-14" position="170 0 171" rotation="0 10 0" scale="8 7.5 8" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+  <a-entity id="palm-wind-15" position="107 0 217" rotation="0 10 0" scale="6 6 6" instanced-mesh-member="mesh:#palm-tree-mesh"></a-entity>
+
+</a-entity>  <!-- end of main scene wrapper -->
+<!-- ******************************  -->
+
+<!-- DIORAMA WORLD SETUP -->
+<a-entity id="second-scene-wrapper" visible="false">
+  <a-plane position="675 2 -80" rotation="-90 0 0" width="540" height="380" color="#80989e" repeat="20 20"></a-plane>
+
+  <a-entity id="diorama-scene-model" gltf-model="#diorama-model" position="758.3 21.68 -101.3"  scale="4.109 5.05 3.911" rotation="0 0 0"></a-entity>
+
+  <a-entity position="305.04001 293.06354 0" light="color: #ffffff; distance: 2.15" id="light-diorama" visible="" type: point;></a-entity> 
+
+
+<a-entity id="cordillera-wrapper">
+  <a-plane id="info-card" scale="20 20 1" position="750 39 -50">
+    <a-entity id="info-title" text="value: Cordiellera; wrapCount:13" position="0.019 0.360 0.1" scale="1 1 1" rotation="0 0 0"  ></a-entity>
+    <a-entity id="info-bird" text="value: Montane Racket Tail; wrapCount:16.5" position="-0.15 0.167 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"  ></a-entity>
+    <a-entity id="info-bird-2" text="value: White-browed jungle fly catcher; wrapCount:16.5" position="-0.15 -0.026 0.1" scale="0.6 0.6 0.6" rotation="0 0 0"></a-entity>
+  </a-plane>
+</a-entity>
+
+ <!-- PORTAL TO MAIN WORLD  -->
+     <a-entity id="portal-1" position="685 47 -154">
+       <a-sphere position="0 -2 0" class="clickable" rotation="0 180 0" radius="2" material="src: #second-sky; repeat: 1 1; roughness: 2;" color="#ffffff" opacity="1" roughness="0.8"
+       event-set__start="_target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 1;" event-set__mouseenter="_target: #highlight11; animation.property: visible; animation.dur: 20; animation.to: true;"
+       event-set__mouseleave="_target: #highlight11; animation.property: visible; animation.dur: 20; animation.to: false;" event-set__end="_delay: 650; _target: #blink; _event: click; animation.property: opacity; animation.easing: linear; animation.dur: 600; animation.to: 0;" > </a-sphere>
+       <a-sphere position="0 -2 0" id="highlight11" class="highlight" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5"></a-sphere>
+       
+       <a-sphere id="cord-exit" class="clickable" position="0 -20 0"  visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5" exit-world-toggle exit-cord></a-sphere>
+       <a-sphere id="benget-exit" class="clickable" position="0 -20 0" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5" exit-world-toggle exit-benget></a-sphere>
+       <a-sphere id="mindoro-exit" class="clickable" position="0 -20 0" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5" exit-world-toggle exit-mindoro></a-sphere>
+       <a-sphere id="cagayan-exit" class="clickable" position="0 -20 0" visible="false" radius="2.7" rotation="0 0 0" color="#e3df00" opacity="0.6" roughness="1" metalness="0.5" exit-world-toggle exit-cagayan></a-sphere>
+      <a-box id="shadow" position="0 -9.7 0" color="#bd8400" opacity="1" rotation="0 0 0" scale="1.4 8 1.4"></a-box>
+       </a-entity>
+   
+
+
+</a-entity>
+
+
   </a-scene>
+
 </body>
+
+
+<!-- Custom Scripts -->
+<script src="./model-loader.js"></script>
+<script src="./index.js"></script>
+
 </html>
+
+
+
+

@@ -2,9 +2,11 @@
   "name": "aframe-boilerplate-parcel",
   "version": "1.0.0",
   "description": "A-Frame boilerplate with zero config using Parcel. ",
-  "main": "index.js",
+  "main": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html --https --cert '/Users/mattporter/Documents/1.Work Area/Github Desktop/Whiteheads Ark - Parcel/src/cert.pem' --key '/Users/mattporter/Documents/1.Work Area/Github Desktop/Whiteheads Ark - Parcel/src/key.pem'",
+    "build": "parcel build src/index.html --no-minify"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,15 @@
   },
   "homepage": "https://github.com/samhoudmedia/aframe-boilerplate-parcel#readme",
   "dependencies": {
-    "aframe": "^0.7.1"
+    "aframe": "^1.2.0",
+    "assets": "^3.0.1",
+    "autoprefixer": "^10.4.2",
+    "browserslist": "^4.19.1",
+    "caniuse-lite": "^1.0.30001299",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "cssnano": "^5.0.15",
+    "postcss": "^8.4.5"
   }
 }

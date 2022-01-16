@@ -1,0 +1,291 @@
+/* to display text in front of the aframe canvas*/
+a-scene{
+    z-index: -1;
+  }
+  
+  /* Inspector Loading */
+  .a-inspector-loader { 
+    z-index: -3;
+  }
+  /**/
+  @font-face {
+    font-family: "maragsa";
+    src: url("./assets/BackOut.woff") format('woff');
+    /* src: url("./assets/Maragsa-Display.woff2") format('woff'); */
+    
+}
+  
+  body{
+      background-color: #000;
+    
+      color: #fff;
+      width: 100vw;
+      height: 100vh;
+  }
+  
+  a:link, a:visited, a:active {
+      color: white;
+      text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    text-decoration-color: white;
+
+  }
+  
+  .container{
+      position:absolute;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      /* margin-top: 15%; */
+
+
+  }
+  
+  .info{
+    font-family: "maragsa";
+    font-variant-ligatures: common-ligatures;
+    /* position:absolute; */
+    background-color:#176075;
+      /* padding: 30px; */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;      
+     /* background-color: #CFCEC7; */
+
+  
+      /* position: absolute; */
+      /*top: 50%;*/
+      /* left: 50%; */
+      /* transform: translate(-50%, -0%); */
+  
+  
+  }
+  
+  .info .company{
+      font-size: 2em;
+      text-align: center;
+  }
+
+  .dev {
+    color: white;
+  }
+  
+  .info .title{
+    
+      /* font-size: 8em;
+      font-family: "maragsa";
+      font-variant-ligatures: common-ligatures;
+      color: #D58442;
+      text-align: center; */
+  }
+
+  .wh-img {
+
+    width: 25vw;
+  }
+
+  .info .title2{
+    font-size: 1.4em;
+    font-family: "maragsa";
+    font-variant-ligatures: common-ligatures;
+    color:white;
+    text-align: center;
+}
+
+.title3{
+    /* padding: 10px; */
+    font-size: 1.4em;
+    font-family: "maragsa";
+    font-variant-ligatures: common-ligatures;
+    color:white;
+    text-align: center;
+}
+
+p {
+
+    font-size: 3rem;
+    color: red;
+    text-decoration-line: underline;
+}
+  
+  .info .button{
+      font-weight: bold;
+      /* background-color: limegreen; */
+      padding: 10px;
+      margin: -100px 0 0 0;
+      border: red;
+      border-width: 2px;
+      border-style: solid;
+      border-radius: 4rem;
+      visibility:hidden;
+    
+  }
+  
+  .info .instructions{
+      background-color: rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin: 24px 0 0 0;
+  }
+
+ .footer {
+    position: fixed;
+    bottom: 30px;
+    width: 100vw;
+    display: inline-flex;
+    font-size: 1rem;
+
+    font-family: Helvetica, sans-serif;
+
+
+
+  }
+
+  .date {
+    display: inline-flex;
+    width: fit-content;
+    position: relative;
+    left: 2%;
+}
+
+.artblox {
+    width: fit-content;
+    position: relative;
+    right: -75%;
+}
+  
+/* ************************************************** */
+/* Loading and love heart Animation */
+  .container1 {
+    display        : flex;
+    justify-content: center;
+}
+
+.item {
+    width           : 20px;
+    height          : 20px;
+    background-color: #ffb300;
+    margin          : 12px;
+    border-radius   : 10%;
+    background-image: linear-gradient(145deg,
+            rgba(255, 255, 255, 0.6),
+            rgba(0, 0, 0, 0));
+    animation: scaleAnimation 1s linear infinite;
+}
+
+@keyframes scaleAnimation {
+    0%,
+    50%,
+    100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(0.6);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+}
+
+.red {
+    background-color: #f8005f;
+    animation-delay: 0.1s;
+}
+
+.blue {
+    background-color: #ffb300;
+    animation-delay: 0.2s;
+}
+
+.violet {
+    background-color: #504f21;
+    animation-delay: 0.3s;
+}
+
+.love {
+    display: inline-block;
+    position: relative;
+    top: .2em;
+    font-size: 1.4em;
+    color: #e74c3c;
+    -webkit-transform: scale(.9);
+    -moz-transform: scale(.9);
+    transform: scale(.9);
+    -webkit-animation: love .5s infinite linear alternate-reverse;
+    -moz-animation: love .5s infinite linear alternate-reverse;
+    animation: love .5s infinite linear alternate-reverse;
+  }
+  @-webkit-keyframes love {
+    to {-webkit-transform: scale(1.2);}
+  }
+  @-moz-keyframes love {
+    to {-moz-transform: scale(1.2);}
+  }
+  @keyframes love {
+    to {transform: scale(1.2);}
+  }
+
+/* ************************************************** */
+/* A-Frame Styling */
+
+/* Mobile Popup Modal  */
+.a-dialog-allow-button {
+    background-color: green;
+       color: white;
+  
+  }
+  
+  .a-dialog-deny-button {
+    background-color: red;
+       color: white;
+  
+  }
+  
+  .a-dialog-ok-button {
+     background-color: yellow;
+     color: white;
+   }
+  
+  .a-dialog-text-container {
+    color: black;
+  }
+
+  
+
+/* ************************************************** */
+/* Mobile View */
+
+  @media (max-width: 600px) {
+    .info {
+      width: 100%
+    }
+
+    .info .title2 {
+      font-size: 1.2em;
+      width: 80vw;
+    }
+  
+    .info .company{
+        font-size: 1.2px;
+    }
+
+    .info .title{
+      font-size: 1.9em;
+    }
+
+    .info {
+  }
+
+
+  }
+
+
+

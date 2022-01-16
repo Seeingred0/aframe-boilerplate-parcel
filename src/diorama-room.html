@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+  <head>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.1/dist/aframe-extras.min.js" ></script>
+
+    <script src="https://unpkg.com/aframe-liquid-portal-shader"></script>
+
+
+
+  </head>
+  <body>
+
+
+  
+    <script>
+      AFRAME.registerComponent('mainworld', {
+        init: function () {
+          console.log('main world')
+       
+
+
+
+        }});
+      </script>
+
+
+
+    <a-scene>
+
+    <a-assets>
+
+    <!--  Portal Asset  -->
+    <img id="thumbIndex" crossOrigin="anonymous" src="https://raw.githubusercontent.com/TravisBarryDick/aframe-liquid-portal-shader/main/dist/demo.png">
+    </a-assets>
+
+    <!-- ****************************** Camera Setup ****************************** -->
+<!-- <a-entity rig id="rig" movement-controls="constrainToNavMesh: true; speed: 1.5" position="167.79 7.3 -225.7" alongpath="curve: #track4; loop: false; dur:19000; rotate:false" rotation="0 0 0" > -->
+  <a-entity id="rig" movement-controls=" constrainToNavMesh: false; speed: 1.5" position="0 0 0"  >
+    <a-entity camera position="0 2 0" look-controls  >
+      <a-cursor raycaster="objects: .clickable; far: 60"   fuse="true" fusetimeout="2000" ></a-cursor>
+    </a-entity>  
+  </a-entity>
+
+    <!-- Portal 1 -->
+    <a-image class="clickable" link="href: /index.html" scale="2 2 2" src="#thumbIndex" position="5  4 -2" material="shader: liquid-portal"></a-image>
+
+      <!-- <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box> -->
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="yellow"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
